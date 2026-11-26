@@ -247,7 +247,7 @@ section{padding:72px 0;scroll-margin-top:72px}
 .bar .res b{font:400 1.6rem/1 var(--display);display:block;color:var(--amarillo)}
 .fab{position:fixed;right:16px;bottom:16px;z-index:44;display:inline-flex;align-items:center;gap:8px;background:var(--wa);color:#fff;text-decoration:none;font-weight:800;font-size:.9rem;padding:12px 16px;border-radius:999px;box-shadow:0 14px 30px -12px rgba(0,0,0,.55);transition:opacity .2s}
 .fab svg{width:22px;height:22px}
-body.con-pedido .fab{opacity:0;pointer-events:none}
+body.con-pedido .fab{bottom:calc(84px + env(safe-area-inset-bottom,0px))}body.con-pedido .asis{bottom:150px}
 .modal{position:fixed;inset:0;z-index:210;background:rgba(10,10,10,.6);display:none;align-items:flex-end;justify-content:center}
 .modal.on{display:flex}
 .hoja{background:var(--papel);width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:22px 22px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom,0px))}
@@ -270,6 +270,57 @@ body.con-pedido .fab{opacity:0;pointer-events:none}
 .hoja .btn{width:100%;margin-top:12px}
 .btn-claro{background:#fff;color:var(--negro);border:1px solid var(--linea)}
 @media(prefers-reduced-motion:reduce){.bar{transition:none}}
+
+/* portada con video */
+.hero{min-height:min(88vh,780px);display:flex;align-items:center}
+.hero::before{z-index:1;background:linear-gradient(90deg,rgba(18,18,18,.94) 0%,rgba(18,18,18,.8) 45%,rgba(18,18,18,.45) 100%),radial-gradient(600px 400px at 85% 30%,rgba(200,25,31,.35),transparent 70%)}
+.hero-video,.hero-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero .wrap{z-index:2;width:min(var(--max),100% - 32px)}
+.hero h1{font-size:clamp(3.2rem,7.2vw,6.2rem)}
+/* tablero de salidas */
+.tablero{background:#0b0b0b;border:3px solid #2a2a2a;border-radius:18px;padding:18px;box-shadow:0 0 0 6px rgba(244,180,0,.12),0 30px 60px -20px rgba(0,0,0,.8);font-variant-numeric:tabular-nums}
+.tab-cab{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:2px 4px 12px;border-bottom:2px dashed #333;font:400 1.5rem/1 var(--display);text-transform:uppercase;color:var(--amarillo);letter-spacing:.04em}
+.reloj{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace;font-size:1.25rem;color:#ffd75e;background:#1a1a1a;padding:5px 10px;border-radius:8px;text-shadow:0 0 8px rgba(244,180,0,.6)}
+.tab-col{display:grid;grid-template-columns:1fr 54px 92px;gap:8px;padding:10px 6px 6px;font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#777}
+.tab-col span:nth-child(2){text-align:center}.tab-col span:last-child{text-align:right}
+#salidas{list-style:none;display:grid;gap:6px}
+.salida{display:grid;grid-template-columns:1fr 54px 92px;gap:8px;align-items:center;background:#161616;border-radius:10px;padding:10px 8px 10px 10px;opacity:0;transform:translateY(8px);animation:sale .5s forwards}
+@keyframes sale{to{opacity:1;transform:none}}
+.salida b{font:700 .98rem/1.2 ui-monospace,"Cascadia Mono",Consolas,monospace;color:#ffd75e;text-transform:uppercase;letter-spacing:.02em}
+.salida .anden{justify-self:center;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:.8rem;color:#fff;background:var(--c)}
+.salida .val{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+.salida .val span{font:700 .95rem/1 ui-monospace,Consolas,monospace;color:#fff}
+.salida .add{height:30px;padding:0 10px;font-size:.75rem;border-radius:8px}
+.salida .ctrl .qb{width:28px;height:28px;font-size:15px;border-radius:8px}
+.salida .ctrl .qn{color:#fff;min-width:16px;font-size:.85rem}
+.tab-pie{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:.82rem;color:#aaa}
+.vivo{display:inline-block;width:9px;height:9px;border-radius:50%;background:#2bd46b;box-shadow:0 0 0 0 rgba(43,212,107,.6);animation:latido 2s infinite;flex:none}
+.vivo.cerrado{background:#e5484d;animation:none}
+@keyframes latido{70%{box-shadow:0 0 0 9px rgba(43,212,107,0)}100%{box-shadow:0 0 0 0 rgba(43,212,107,0)}}
+@media (prefers-reduced-motion:reduce){.salida{animation:none;opacity:1;transform:none}.vivo{animation:none}}
+@media (max-width:900px){.hero{min-height:auto}.tablero{max-width:520px}}
+/* cómo pedir */
+.como{background:var(--papel)}
+.ruta{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;position:relative}
+.ruta::before{content:"";position:absolute;left:8%;right:8%;top:34px;height:8px;border-radius:8px;background:linear-gradient(90deg,var(--l1),var(--l2),var(--l4))}
+.ruta li{position:relative;background:#fff;border:1px solid var(--linea);border-radius:18px;padding:70px 22px 22px;text-align:center}
+.ruta .n{position:absolute;left:50%;top:12px;transform:translateX(-50%);width:46px;height:46px;border-radius:50%;background:var(--negro);color:#fff;display:grid;place-items:center;font:400 1.5rem/1 var(--display);border:6px solid #fff;box-shadow:0 0 0 3px var(--negro)}
+.ruta h3{font-size:1.8rem;margin-bottom:6px}.ruta p{color:var(--suave)}
+@media (max-width:760px){.ruta{grid-template-columns:1fr}.ruta::before{left:50%;right:auto;top:20px;bottom:20px;width:8px;height:auto;transform:translateX(-50%);background:linear-gradient(var(--l1),var(--l2),var(--l4))}}
+/* videos */
+.videos{background:var(--rojo);color:#fff;position:relative;overflow:hidden;background-image:repeating-linear-gradient(-45deg,rgba(0,0,0,.08) 0 16px,transparent 16px 32px)}
+.videos .eti{color:var(--amarillo)}.videos .eti i{background:var(--rojo)}
+.videos h2{font-size:clamp(2.4rem,5vw,3.8rem)}.videos h2 em{color:var(--amarillo)}
+.videos-grid{display:grid;grid-template-columns:1fr auto auto;gap:28px;align-items:center}
+.baja-v{margin:14px 0 22px;font-size:1.08rem;color:#ffe3e3;max-width:40ch}
+.cel{margin:0;width:250px;background:#0b0b0b;border-radius:34px;padding:10px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7);transform:rotate(-3deg)}
+.cel+.cel{transform:rotate(3deg) translateY(24px)}
+.cel video{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:26px;background:#000;display:block}
+.cel figcaption{text-align:center;font:400 1.05rem/1.2 var(--display);text-transform:uppercase;padding:10px 4px 4px;color:var(--amarillo)}
+@media (max-width:900px){.videos-grid{grid-template-columns:1fr 1fr}.videos-grid>div:first-child{grid-column:1/-1}.cel{width:auto;transform:none}.cel+.cel{transform:none}}
+@media (max-width:480px){.cel{border-radius:24px;padding:7px}.cel video{border-radius:18px}}
+/* asistente: colores de la página */
+.asis{--bg:#fff;--surface:var(--papel);--text:var(--tinta);--muted:var(--suave);--accent:var(--rojo);--line:var(--linea);--font:var(--font);--display:var(--display)}
 </style>
 </head>
 <body>
@@ -286,7 +337,7 @@ body.con-pedido .fab{opacity:0;pointer-events:none}
 <header class="top">
   <div class="wrap">
     <a class="marca" href="#inicio" aria-label="Estación 44 Street Food, inicio"><img src="assets/logo-360.png" alt="Estación 44 Street Food" width="360" height="246"></a>
-    <nav class="menu" aria-label="Secciones"><a href="#favoritos">Favoritos</a><a href="#carta">Carta</a><a href="#fotos">Fotos</a><a href="#opiniones">Opiniones</a><a href="#visita">Cómo llegar</a></nav>
+    <nav class="menu" aria-label="Secciones"><a href="#favoritos">Favoritos</a><a href="#carta">Carta</a><a href="#videos">Videos</a><a href="#fotos">Fotos</a><a href="#opiniones">Opiniones</a><a href="#visita">Cómo llegar</a></nav>
     <div class="top-der">
       <a class="btn btn-rojo" href="#carta">Pedir ahora</a>
       <button class="menu-btn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mm"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18" stroke="#121212"/><path d="M3 12h18" stroke="#121212"/><path d="M10 17.5h11" stroke="#c8191f"/></svg></button>
@@ -301,6 +352,7 @@ body.con-pedido .fab{opacity:0;pointer-events:none}
     <ul class="mm-linea">
       <li><a href="#favoritos">Favoritos</a></li>
       <li><a href="#carta">Carta</a></li>
+      <li><a href="#videos">Videos</a></li>
       <li><a href="#fotos">Fotos</a></li>
       <li><a href="#opiniones">Opiniones</a></li>
       <li><a href="#visita">Cómo llegar</a></li>
@@ -315,6 +367,8 @@ body.con-pedido .fab{opacity:0;pointer-events:none}
 
 <main id="inicio">
 <section class="hero" aria-label="Portada">
+  <img class="hero-poster" src="assets/videos/portada.jpg" alt="" aria-hidden="true">
+  <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/videos/portada.jpg" aria-hidden="true"><source src="assets/videos/portada.mp4" type="video/mp4"></video>
   <div class="wrap">
     <div class="reveal">
       <span class="eti"><i></i><i></i>Patio Box Park · Estación Central</span>
@@ -322,11 +376,16 @@ body.con-pedido .fab{opacity:0;pointer-events:none}
       <p class="baja">Hamburguesas, patacones, cachapas, pepitos y arepas con sabor venezolano. Arme su pedido aquí y se lo dejamos listo para retirar o con delivery.</p>
       <div class="acciones">
         <a class="btn btn-ama" href="#carta">Ver la carta y pedir</a>
-        <a class="btn btn-borde wa-link" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2l-.5-.3z"/></svg>WhatsApp</a>
+        <a class="btn btn-borde wa-link" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2l-.5-.3z"/></svg>+56 9 2770 5652</a>
       </div>
       <ul class="chips"><li><b>★ 5,0</b> en Google</li><li><b>★ 4,8</b> en PedidosYa</li><li>Mar a dom · 16:00 a 00:00</li><li>Delivery activo</li></ul>
     </div>
-    <div class="plato reveal"><img src="assets/burger.jpg" alt="Hamburguesa con carne, tocino, huevo y queso cheddar" width="1000" height="750" fetchpriority="high"><span class="sello">Desde<b>$8.990</b>hamburguesas</span></div>
+    <aside class="tablero reveal" aria-label="Los más pedidos de hoy">
+      <div class="tab-cab"><span>Próximas salidas</span><span class="reloj" id="reloj">--:--</span></div>
+      <div class="tab-col"><span>Plato</span><span>Andén</span><span>Valor</span></div>
+      <ol id="salidas"></ol>
+      <p class="tab-pie"><span class="vivo"></span><span id="estado">Abierto de martes a domingo, de 16:00 a 00:00</span></p>
+    </aside>
   </div>
 </section>
 <div class="cinta" aria-hidden="true"><div><span>Hamburguesas</span><span>Patacones</span><span>Cachapas</span><span>Pepitos</span><span>Arepas</span><span>Tequeños</span><span>Parrilla</span><span>Hamburguesas</span><span>Patacones</span><span>Cachapas</span><span>Pepitos</span><span>Arepas</span><span>Tequeños</span><span>Parrilla</span></div></div>
@@ -335,6 +394,17 @@ body.con-pedido .fab{opacity:0;pointer-events:none}
   <div class="wrap">
     <div class="cab reveal"><div><span class="eti"><i></i><i></i>Los más pedidos</span><h2>Favoritos de <em>la casa</em></h2></div><p>Los platos que más salen. Agréguelos al pedido con un toque.</p></div>
     <div class="favs" id="favs"></div>
+  </div>
+</section>
+
+<section id="como" class="como">
+  <div class="wrap">
+    <div class="cab reveal"><div><span class="eti"><i></i><i></i>Sin apps ni comisiones</span><h2>Pedir es <em style="color:var(--rojo)">así de fácil</em></h2></div><p>Directo con el local, por WhatsApp. Usted ve el total antes de enviar.</p></div>
+    <ol class="ruta">
+      <li class="reveal"><span class="n">1</span><h3>Elija</h3><p>Toque «Agregar» en lo que se le antoje de la carta.</p></li>
+      <li class="reveal"><span class="n">2</span><h3>Envíe</h3><p>Ponga su nombre, retiro o delivery, y el pedido sale armado por WhatsApp.</p></li>
+      <li class="reveal"><span class="n">3</span><h3>Disfrute</h3><p>El local le confirma el total y el tiempo. Pase a buscarlo o espérelo en casa.</p></li>
+    </ol>
   </div>
 </section>
 
@@ -367,6 +437,21 @@ body.con-pedido .fab{opacity:0;pointer-events:none}
       <figure><img src="assets/papas-bacon.jpg" alt="Papas fritas con cheddar y tocino" loading="lazy" width="1000" height="750"></figure>
     </div>
     <a class="ig" href="https://www.instagram.com/estacion44.cl/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>Más en @estacion44.cl</a>
+  </div>
+</section>
+
+<section id="videos" class="videos">
+  <div class="wrap">
+    <div class="videos-grid">
+      <div class="reveal">
+        <span class="eti"><i></i><i></i>En video</span>
+        <h2>Directo de <em>la cocina</em></h2>
+        <p class="baja-v">Así salen los platos de la estación. Dele play y después pídalo con un toque.</p>
+        <div class="acciones"><a class="btn btn-ama" href="#carta">Pedir ahora</a><a class="btn btn-borde" href="https://www.instagram.com/estacion44.cl/" target="_blank" rel="noopener">Ver Instagram</a></div>
+      </div>
+      <figure class="cel reveal"><video controls playsinline preload="none" poster="assets/videos/gustito.jpg"><source src="assets/videos/gustito.mp4" type="video/mp4"></video><figcaption>¿Y si hoy se da un gustito?</figcaption></figure>
+      <figure class="cel reveal"><video controls playsinline preload="none" poster="assets/videos/carta.jpg"><source src="assets/videos/carta.mp4" type="video/mp4"></video><figcaption>De todo en la estación</figcaption></figure>
+    </div>
   </div>
 </section>
 
@@ -410,7 +495,7 @@ body.con-pedido .fab{opacity:0;pointer-events:none}
   <div class="wrap" style="margin-top:28px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);display:block;font-size:.82rem;color:rgba(255,255,255,.5)">© <span id="y"></span> Estación 44 Street Food</div>
 </footer>
 
-<a class="fab wa-link" href="#" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2l-.5-.3z"/></svg>WhatsApp</a>
+<a class="fab wa-link" href="#" target="_blank" rel="noopener" aria-label="Te ayudo a pedir"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2l-.5-.3z"/></svg><span class="fab-txt">Te ayudo a pedir</span></a>
 
 <div class="bar" id="bar" aria-live="polite">
   <div class="wrap">
@@ -440,7 +525,7 @@ body.con-pedido .fab{opacity:0;pointer-events:none}
 </div>
 
 <script>
-var WHATSAPP = "56947452390";
+var WHATSAPP = "56927705652";
 var FAVS = [
   {id:"h-doble", img:"burger-alta.jpg", tag:"Más vendido"},
   {id:"pat-especial", img:"patacon.jpg", tag:"Más vendido"},
@@ -612,8 +697,27 @@ document.getElementById("enviar").onclick = function(){
   window.open(waLink(mensaje()), "_blank", "noopener");
 };
 
-cargar(); pintarFavs(); pintarCombos(); pintarCarta(); refrescar();
+function pintarSalidas(){
+  var ol = document.getElementById("salidas"); if (!ol) return;
+  var S = [["h-doble", 1], ["pat-especial", 3], ["cach-proteina", 4], ["pep-xl", 2], ["papas-estacion", 6]];
+  S.forEach(function(s, i){
+    var x = REF[s[0]], li = el("li", "salida"); li.style.animationDelay = (0.15 + i * 0.12) + "s"; li.style.setProperty("--c", x.c);
+    li.appendChild(el("b", "", x.n)); li.appendChild(el("span", "anden", "L" + s[1]));
+    var v = el("div", "val"); v.appendChild(el("span", "", clp(x.p))); v.appendChild(control(s[0])); li.appendChild(v);
+    ol.appendChild(li);
+  });
+}
+function reloj(){
+  var r = document.getElementById("reloj"), e = document.getElementById("estado"), d = new Date();
+  if (r) r.textContent = String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
+  var abierto = d.getDay() !== 1 && d.getHours() >= 16;
+  if (e){ e.textContent = abierto ? "Abierto ahora · hasta las 00:00" : "Cerrado ahora · abrimos de martes a domingo a las 16:00"; var dot = e.previousElementSibling; if (dot) dot.classList.toggle("cerrado", !abierto); }
+}
 
+cargar(); pintarSalidas(); pintarFavs(); pintarCombos(); pintarCarta(); refrescar(); reloj(); setInterval(reloj, 30000);
+
+/* video de portada: se detiene si la persona pidió menos movimiento */
+(function(){ var v = document.querySelector(".hero-video"); if (v && window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches){ v.removeAttribute("autoplay"); v.pause(); v.style.display = "none"; } })();
 /* aparición al bajar */
 (function(){
   var io = "IntersectionObserver" in window ? new IntersectionObserver(function(es){ es.forEach(function(x){ if (x.isIntersecting){ x.target.classList.add("visto"); io.unobserve(x.target); } }); }, {rootMargin:"0px 0px -8% 0px"}) : null;
@@ -633,6 +737,9 @@ cargar(); pintarFavs(); pintarCombos(); pintarCarta(); refrescar();
   window.addEventListener("resize", function(){ if (innerWidth > 920 && m.classList.contains("abierto")) cerrarM(); });
 })();
 </script>
+<link rel="stylesheet" href="asistente.css">
+<script>window.ASISTENTE = {"negocio": "Estación 44", "persona": "Estación 44", "wa": "56927705652", "boton": "Te ayudo a pedir", "confirma": "los pedidos se confirman", "hola": "Hola Estación 44, vi su página web", "pedido": "quiero pedir", "agendar": "Quiero pedir", "preguntaCuando": "¿Cómo lo quiere?", "saludo": "¡Hola! Soy el asistente de Estación 44. ¿Qué se le antoja hoy?", "cuando": [{"t": "Para retirar", "m": "Lo paso a retirar al local."}, {"t": "Con delivery", "m": "Lo quiero con delivery."}, {"t": "Para comer allá", "m": "Lo como en el patio del Box Park."}, {"t": "Solo consulto", "m": "Por ahora solo quiero consultar."}], "servicios": [{"n": "Hamburguesas", "info": "Todas vienen con papas fritas. Desde $8.990 la sencilla hasta $15.990 la triple. ¿Cuál quiere?", "opts": ["Sencilla $8.990", "Especial $10.990", "Especial de lomito $10.990", "Doble $13.990", "Triple $15.990"], "kw": "hamburgues|burger|burguer"}, {"n": "Patacones", "info": "De plátano verde o amarillo, con lechuga, tomate y la proteína que elija.", "opts": ["Especial $12.990", "Doble $14.990", "Triple $17.990"], "kw": "patacon|patacón|platano|plátano"}, {"n": "Cachapas", "info": "Hechas al momento, con queso de mano y nata.", "opts": ["Con queso de mano $8.990", "Con queso y proteína $11.990", "Cachapa burger $12.990"], "kw": "cachapa"}, {"n": "Pepitos y perros", "info": "Pepitos de 20, 30 y 40 cm, y perros calientes con todo.", "opts": ["Perro caliente $2.990", "Perro especial $3.990", "Pepiperro $5.500", "Pepito 20 cm $11.990", "Pepito XL 30 cm $14.990", "Pepito XXL 40 cm $21.990"], "kw": "pepito|perro|hot ?dog|completo"}, {"n": "Arepas", "info": "Cabimeras con mechada, pollo o chuleta, jamón, queso de mano y huevo.", "opts": ["Cabimera $12.990", "Cabimera doble $13.990", "Cabimera triple $17.990"], "kw": "arepa|cabimera"}, {"n": "Combos y parrilla", "info": "Para compartir con la familia o los amigos.", "opts": ["4 perros + 2 latas $14.990", "Combo hamburguesa $10.500", "2 pepitos mixtos + 2 latas $24.990", "Parrilla personal $12.990", "Parrilla familiar $43.990"], "kw": "combo|parrilla|compartir|familia|familiar"}], "faq": [{"pri": true, "kw": "precio|valor|cuanto|cuánto|costo|sale|carta|menu|menú", "r": "La carta completa con precios está en esta página: toque «Ver la carta y pedir» o dígame qué se le antoja y le armo el mensaje."}, {"kw": "donde|dónde|direccion|dirección|ubicacion|ubicación|llegar|box park|metro", "r": "Estamos en Av. Ecuador 4400, Patio Box Park, local 13, en Estación Central."}, {"kw": "horario|hora|abren|abierto|cierran|lunes|domingo|sabado|sábado", "r": "Abrimos de martes a domingo, de 16:00 a 00:00. Los lunes está cerrado."}, {"kw": "delivery|despacho|domicilio|envio|envío|reparto", "r": "Sí, tenemos delivery. El costo depende de la dirección y se lo confirmamos por WhatsApp. También estamos en PedidosYa y Uber Eats."}, {"kw": "pago|transferencia|efectivo|tarjeta|debito|débito", "r": "La forma de pago se la confirmamos por WhatsApp al tomar el pedido."}, {"kw": "venezolan|tequeño|tequeno|malta|papelon|papelón|frescolita", "r": "Sí, tenemos sabores venezolanos: tequeños, cachapas, patacones, pepitos, malta, papelón y Frescolita."}]};</script>
+<script src="asistente.js" defer></script>
 <!-- contador de visitas -->
 <script>(function(){try{var L=localStorage,S=sessionStorage;if(location.search.indexOf('yo=1')>-1)L.setItem('soy-de-la-casa','1');
 if(L.getItem('soy-de-la-casa')||S.getItem('visita-contada'))return;S.setItem('visita-contada','1');
